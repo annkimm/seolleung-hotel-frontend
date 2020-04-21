@@ -53,4 +53,5 @@
 - 개인 정보 수정 및 비밀번호 변경도 fetch를 통해 수정 가능하게 구현함.
 
 ## 데모영상
-[클론 영상 보러가기](https://youtu.be/HULscwbnHyw)
+
+[![readme.png](./src/Images/readme.png)](https://youtu.be/HULscwbnHyw)
