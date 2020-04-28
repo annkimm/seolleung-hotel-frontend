@@ -7,11 +7,13 @@ import insta4 from "Images/lahan_insta4.jpg";
 import insta5 from "Images/lahan_insta5.jpg";
 
 export default class Instagram extends Component {
-  state = {
-    movePX: 0,
-    moveTitle: false,
-    moveList: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      moveTitle: false,
+      moveList: false
+    };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -42,13 +44,13 @@ export default class Instagram extends Component {
             <ItemList moveImg={this.state.moveList}>
               <img
                 src="https://www.lahanhotels.com/intro/images/sns_img-1.jpg"
-                alt=""
+                alt="insta0"
               />
-              <img src={insta1} alt="" />
-              <img src={insta2} alt="" />
-              <img src={insta3} alt="" />
-              <img src={insta4} alt="" />
-              <img src={insta5} alt="" />
+              <img src={insta1} alt="insta1" />
+              <img src={insta2} alt="insta2" />
+              <img src={insta3} alt="insta3" />
+              <img src={insta4} alt="insta4" />
+              <img src={insta5} alt="insta5" />
             </ItemList>
           </Panel>
         </Sns>
