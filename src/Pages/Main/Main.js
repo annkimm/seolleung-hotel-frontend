@@ -11,6 +11,7 @@ import styled, { css } from "styled-components";
 export default class Main extends Component {
   constructor() {
     super();
+    this.page = React.createRef();
     this.state = {
       windowScroll: 0,
       moveTitle: false
@@ -18,13 +19,18 @@ export default class Main extends Component {
   }
 
   handleScroll = e => {
-    if (this.section1.offsetTop < this.section4.offsetTop) {
-      console.log("in");
+    const scrollTop = window.pageYOffset;
+    if (
+      this.section1.offsetTop - 500 < scrollTop &&
+      scrollTop < this.section3.offsetTop + 500
+    ) {
       this.setState({ moveTitle: true });
-    } else if (this.section0.offsetTop || this.section4.offsetTop) {
+    } else if (
+      this.section1.offsetTop > scrollTop ||
+      scrollTop < this.section4.offsetTop - 500
+    ) {
       this.setState({ moveTitle: false });
     }
-    console.log("this.section.offset", this.section1.offsetTop);
   };
 
   handleClick = id => {
@@ -44,11 +50,9 @@ export default class Main extends Component {
     } else {
       this.setState({ moveTitle: true });
     }
-    console.log("section2 current", this.section2.offsetTop);
   };
 
   render() {
-    console.log(window.offsetTop);
     return (
       <Container onWheel={this.handleScroll}>
         <NavBar />
@@ -62,7 +66,7 @@ export default class Main extends Component {
           <Offers />
         </section>
         <section ref={ref => (this.section3 = ref)}>
-          <Instagram />
+          <Instagram inputRef={this.page} />
         </section>
         <section ref={ref => (this.section4 = ref)}>
           <Footer />
