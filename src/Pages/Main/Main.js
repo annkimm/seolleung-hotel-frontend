@@ -4,36 +4,31 @@ import Mainvisual from "./Component/Mainvisual";
 import Ourhotels from "./Component/Ourhotels";
 import Offers from "./Component/Offers";
 import Instagram from "./Component/Instagram";
-import Subnav from "./Component/Subnav";
 import Footer from "./Component/Footer";
 import { SubnavData } from "./Component/SubnavData";
-// import "fullpage.js/vendors/scrolloverflow";
 import styled, { css } from "styled-components";
 
 export default class Main extends Component {
-  state = {
-    movePX: 0,
-    moveTitle: false,
-    moveList: false
-  };
-
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+  constructor() {
+    super();
+    this.page = React.createRef();
+    this.state = {
+      windowScroll: 0,
+      moveTitle: false
+    };
   }
 
   handleScroll = e => {
-    const scrollTop = ("scroll", e.srcElement.scrollingElement.scrollTop);
-    console.log(scrollTop);
-    if (scrollTop > 280 && scrollTop < 3400) {
-      console.log("in");
+    const scrollTop = window.pageYOffset;
+    if (
+      this.section1.offsetTop - 500 < scrollTop &&
+      scrollTop < this.section3.offsetTop + 500
+    ) {
       this.setState({ moveTitle: true });
-      this.setState({ moveList: true });
-    } else {
-      console.log("in");
-      this.setState({ moveList: false });
+    } else if (
+      this.section1.offsetTop > scrollTop ||
+      scrollTop < this.section4.offsetTop - 500
+    ) {
       this.setState({ moveTitle: false });
     }
   };
@@ -49,13 +44,17 @@ export default class Main extends Component {
       this.section3.scrollIntoView({ block: "start", behavior: "smooth" });
     id === 4 &&
       this.section4.scrollIntoView({ block: "start", behavior: "smooth" });
+
+    if (id === 0 || id === 4) {
+      this.setState({ moveTitle: false });
+    } else {
+      this.setState({ moveTitle: true });
+    }
   };
 
   render() {
-    console.log(window.offsetTop);
-    // const { section } = this.state;
     return (
-      <Container>
+      <Container onWheel={this.handleScroll}>
         <NavBar />
         <section ref={ref => (this.section0 = ref)}>
           <Mainvisual />
@@ -67,7 +66,7 @@ export default class Main extends Component {
           <Offers />
         </section>
         <section ref={ref => (this.section3 = ref)}>
-          <Instagram />
+          <Instagram inputRef={this.page} />
         </section>
         <section ref={ref => (this.section4 = ref)}>
           <Footer />

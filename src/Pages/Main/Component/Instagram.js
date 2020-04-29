@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import styled, { keyframes, css } from "styled-components";
 import insta1 from "Images/lahan_insta1.jpeg";
 import insta2 from "Images/lahan_insta2.jpg";
@@ -7,11 +7,14 @@ import insta4 from "Images/lahan_insta4.jpg";
 import insta5 from "Images/lahan_insta5.jpg";
 
 export default class Instagram extends Component {
-  state = {
-    movePX: 0,
-    moveTitle: false,
-    moveList: false
-  };
+  constructor() {
+    super();
+    this.page = React.createRef();
+    this.state = {
+      instaMoveTitle: false,
+      moveList: false
+    };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -21,20 +24,22 @@ export default class Instagram extends Component {
   }
 
   handleScroll = e => {
-    const scrollTop = ("scroll", e.srcElement.scrollingElement.scrollTop);
-    if (scrollTop > 2950) {
-      this.setState({ moveTitle: true });
+    const scrollTop = window.pageYOffset;
+    const offsetYtop = this.props.inputRef.current.offsetParent.offsetTop;
+    if (scrollTop > offsetYtop - 500) {
+      this.setState({ instaMoveTitle: true });
       this.setState({ moveList: true });
     } else {
+      this.setState({ instaMoveTitle: false });
       this.setState({ moveList: false });
-      this.setState({ moveTitle: false });
     }
   };
+
   render() {
     return (
-      <SnsContainer className="Instagram">
+      <SnsContainer className="Instagram" ref={this.props.inputRef}>
         <Sns>
-          <Title movetitle={this.state.moveTitle}>
+          <Title instaMoveTitle={this.state.instaMoveTitle}>
             <h3>@lahan_hotel</h3>
             <button>Follow</button>
           </Title>
@@ -42,13 +47,13 @@ export default class Instagram extends Component {
             <ItemList moveImg={this.state.moveList}>
               <img
                 src="https://www.lahanhotels.com/intro/images/sns_img-1.jpg"
-                alt=""
+                alt="insta0"
               />
-              <img src={insta1} alt="" />
-              <img src={insta2} alt="" />
-              <img src={insta3} alt="" />
-              <img src={insta4} alt="" />
-              <img src={insta5} alt="" />
+              <img src={insta1} alt="insta1" />
+              <img src={insta2} alt="insta2" />
+              <img src={insta3} alt="insta3" />
+              <img src={insta4} alt="insta4" />
+              <img src={insta5} alt="insta5" />
             </ItemList>
           </Panel>
         </Sns>
@@ -57,7 +62,7 @@ export default class Instagram extends Component {
   }
 }
 
-const moveTitle = keyframes`
+const instaMoveTitle = keyframes`
   from { padding-top: 200px; }
       to   { padding-top: 100px; }
 `;
@@ -90,9 +95,9 @@ const Title = styled.div`
   padding-top: 100px;
   text-align: center;
   ${props => {
-    if (props.movetitle) {
+    if (props.instaMoveTitle) {
       return css`
-        animation-name: ${moveTitle};
+        animation-name: ${instaMoveTitle};
         animation-duration: 2s;
         animation-iteration-count: linear infinite;
       `;

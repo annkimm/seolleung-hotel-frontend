@@ -20,8 +20,6 @@ class DropDownNav extends Component {
   };
 
   render() {
-    console.log("hi", this.props.menu);
-
     return (
       <NavBoxLi onMouseEnter={this.mouseOn} onMouseLeave={this.mouseOn}>
         <DropDownTitle>{this.props.title}</DropDownTitle>

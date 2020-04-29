@@ -14,7 +14,7 @@ export default class Mypage extends Component {
   }
 
   componentDidMount() {
-    // window.scrollTop(0, 0);
+    window.scrollTo(0, 0);
   }
 
   changeStage = num => {
