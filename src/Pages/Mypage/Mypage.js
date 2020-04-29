@@ -16,6 +16,7 @@ export default class Mypage extends Component {
 
   componentDidMount() {
     this.myPage();
+    window.scrollTo(0, 0);
   }
   myPage = async () => {
     fetch(`${address}/users/userinfo`, {
