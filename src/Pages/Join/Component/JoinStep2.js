@@ -149,9 +149,6 @@ class JoinStep2 extends Component {
     let idValidError = null;
     const { pwd, pwdCheck, birthDate } = this.state;
 
-    // console.log(URL.SERVER_URL + "/dataId.json");
-    console.log("첫번쨰", e.target.value);
-
     switch (name) {
       case "id":
         idValidError = await this.idCont(target.value);
@@ -249,8 +246,6 @@ class JoinStep2 extends Component {
         idColor: "red"
       };
     } else if (/^(?=.*[a-z])(?=.*[0-9]).{8,20}/.test(param) === false) {
-      // $ 달러는 문자의 마지막
-      // ^ 꺽쇠는 문자의 시작
 
       return {
         stat: false,
