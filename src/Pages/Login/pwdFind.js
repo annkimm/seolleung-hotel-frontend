@@ -47,8 +47,6 @@ const PwdFind = ({ props, history }) => {
 
       const pwdFetchStatus = pwdFetchCheck.status;
 
-      console.log(pwdFetchStatus);
-
       if (pwdFetchStatus === 200) {
         alert("가입하신 이메일로 임시 비밀번호가 발송되었으니 확인바랍니다.");
 
