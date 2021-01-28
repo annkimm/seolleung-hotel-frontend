@@ -66,4 +66,4 @@
 
 ## 데모영상
 
-[![readme.png](./src/Images/readme.png)](https://youtu.be/HULscwbnHyw)
+[데모버전 영상 바로가기](https://youtu.be/HULscwbnHyw)
