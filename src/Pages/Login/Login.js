@@ -31,7 +31,6 @@ const Login = ({ location, history }) => {
 
   const onClickLogin = async e => {
     if (id.length === 0 && pwd.length === 0) {
-      console.log("a");
       SetIdError("아이디를 입력해주세요.");
       SetPwdError("비밀번호를 입력해주세요.");
     } else {
@@ -83,9 +82,6 @@ const Login = ({ location, history }) => {
 
       if (requestFromKaKao.status === 200) {
         const authorization = await requestFromKaKao.json();
-
-        console.log(kakaoResult);
-        console.log(authorization);
 
         window.localStorage.setItem(
           "Authorization",
