@@ -60,7 +60,6 @@ const IdFind = props => {
 
       const idFetchStatus = idFetchCheck.status;
       const idFetchJson = await idFetchCheck.json();
-      console.log(idFetchStatus, idFetchJson);
 
       if (idFetchStatus === 200) {
         setPageNum(2);
